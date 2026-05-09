@@ -59,6 +59,8 @@ public class todolist {
                     tries --;
                 }
                 
+            } else if (command.equals("exit")){
+                System.exit(0);
             } else {
                 if (!command.equals("")){
                     printlist(list);
