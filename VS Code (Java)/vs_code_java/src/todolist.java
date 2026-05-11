@@ -3,46 +3,58 @@ public class todolist {
    
     public static void todo(){
         System.out.println("Set item count: ");
-        Scanner input = new Scanner(System.in);
-        int items_count = input.nextInt();
+        Scanner u_input = new Scanner(System.in);
+        int items_count = u_input.nextInt();
         String list[] = printlist(new String[items_count]);
         int spot = 0;
-       
+        //htpvs:01011=(above);p
         String sort1 = "";
         String sort2 = "";
         while (true) {
-            String command = input.nextLine();
-            if (command.equals("add")){
-                
-                System.out.println("Enter name: ");
-                command = input.nextLine();
+            String input = u_input.nextLine();
+            String command[] = input.split(" ");
+            if (command[0].equals("add")){
+                int length = command.length;
+                System.out.println(length);
+                if (length > 1){
 
-                for (int i = 0; i < list.length; i++){
-                    if (list[i] == null || list[i].equals("")){
-                        list[i] = command;
-                        i = list.length;
-                        printlist(list);
-                       
-                    } else {
-                        System.out.println("No more space!");
-                     
+                     for (int i = 0; i < list.length; i++){
+
+                        if (list[i] == null || list[i].equals("")){
+
+                            list[i] = command[1];
+                            i = list.length;
+                            
+
+                        } else {
+                            
+                            System.out.println("No more space!");
+
+                        }
+
                     }
-                }
-
-            } else if(command.equals("remove")){
-               
-                System.out.println("Enter line Nr: ");
-                int line = input.nextInt();
-                if (line >= 1 && line <= items_count){
-                    list[line - 1] = ""; 
                     printlist(list);
-                    
+                } else {
+                    System.out.println("out of bound index!");
+                }
+               
+
+            } else if(command[0].equals("remove")){
+                if (command.length > 1){
+                    for (int alpha = 0; alpha < list.length; alpha++){
+                        if (list[alpha].equals(command[1])){
+                            list[alpha] = "";
+                        
+                        }
+                    }
+                    printlist(list);
                 } else {
                     printlist(list);
-                    System.out.println("Wrong index!");
+                    System.out.println("incomplete command!");
                 }
                 
-            } else if (command.equals("sort")){
+                
+            } else if (command[0].equals("sort") && command.length == 1){
                 int tries = list.length;
                 while (tries > 0) {
                    for (int l = 0; l < list.length - 1; l++){
@@ -52,13 +64,13 @@ public class todolist {
                             if (!sort2.equals("")){
                                 list[l] = sort2;
                                 list[l + 1] = sort1;
-                                printlist(list);
+                                
                             }
                         }
                     } 
                     tries --;
                 }
-                
+                printlist(list);
             } else {
                 if (!command.equals("")){
                     printlist(list);
