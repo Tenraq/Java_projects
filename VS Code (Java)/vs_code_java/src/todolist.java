@@ -7,7 +7,6 @@ public class todolist {
         int items_count = u_input.nextInt();
         String list[] = printlist(new String[items_count]);
         int spot = 0;
-        //htpvs:01011=(above);p
         String sort1 = "";
         String sort2 = "";
         while (true) {
